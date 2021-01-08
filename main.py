@@ -1,7 +1,7 @@
 import tensorflow as tf
 from tensorflow import keras
 
-import numpy as py
+import numpy as np
 import matplotlib.pyplot as plt
 
 #loads dataset
@@ -36,6 +36,14 @@ model.compile(optimizer='Adam', loss='sparse_categorical_crossentropy', metrics=
 
 model.fit(train_images, train_labels, epochs=10)
 
-test_loss, test_acc= model.evaluate(test_images,test_labels, verbose= 1)
+test_loss, test_acc= model.evaluate(test_images,test_labels, verbose=1)
 
 print('Test accuracy: ', test_acc)
+
+prediction = model.predict(test_images)
+print(class_names[np.argmax(prediction[8])])
+plt.figure()
+plt.imshow(test_images[8])
+plt.colorbar()
+plt.grid(False)
+plt.show()
